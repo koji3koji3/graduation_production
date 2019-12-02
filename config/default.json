@@ -1,0 +1,28 @@
+{
+    //configファイル
+    "Customer": {
+        "dbConfig": {
+            "host": "localhost",
+            "port": 5984,
+            "dbName": "customers"
+        },
+        "credit": {
+            "initialLimit": 100,
+            // Set low for development
+            "initialDays": 1
+        }
+    },
+    "serverInfo":{
+        "URL" : "https://2e2d94c7.ngrok.io"
+    },
+    "DBInfo":{
+        
+    },
+    "Line":{
+        "LiffId":"1653556959-wJ1xMV00"
+    },
+    "ReportCategory":[
+        "遅刻",
+        "欠席"
+    ]
+  }
