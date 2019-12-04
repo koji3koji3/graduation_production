@@ -6,7 +6,12 @@ let config = require('config');
 router.get('/', function(req, res, next) {
     //ユーザ登録時
     if(req.query.process === 'signUp'){
+        res.render('auth', {
+            title : '',
+            transitionUrl: config.serverInfo.URL + '/signUp',
+            LiffId: config.Line.LiffId
 
+        });
     }
     //遅刻欠席報告
     else if(req.query.process === 'report'){

@@ -1,11 +1,46 @@
+//パッケージ読み込み
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+//DB情報
+const dbAccessor = require('./db/user_table_accessor')
+const sqlite3 = require('sqlite3').verbose();                                          
+var db = new sqlite3.Database(":memory:",
+  sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE);
 
+try{
+  dbAccessor.userSelectAll()
+  .then(result =>{
+    console.log('ok');
+  })
+  .catch(err =>{
+    console.log('no ');
+  })
+}
+catch(err){
+  // console.log('------------------------------');
+  // console.log('------------ERROR-------------');
+  // console.log('------------------------------');
+  // console.log(err.name + ': ' + err.message);
+  // console.log('------------------------------');
+ 
+}
+finally{
+  console.log('------------------------------');
+  console.log('------------FINALLY-----------');
+  console.log('------------------------------');
+  db.close();
+  console.log('------------------------------');
+}
+
+
+
+//ページ
 const auth = require('./routes/auth');
 const index = require('./routes/index');
+const signUp = require('./routes/signUp');
 const users = require('./routes/users');
 const report = require('./routes/report');
 
@@ -30,7 +65,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/report', report);
-app.use('/auth', auth)
+app.use('/auth', auth);
+app.use('/signUp', signUp);
 // app.use('/samples', samplesRouter);
 
 // catch 404 and forward to error handler
