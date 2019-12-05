@@ -13,13 +13,15 @@
         }
     },
     "serverInfo":{
-        "URL" : "https://24e768de.ngrok.io"
+        "URL" : "https://9e37614f.ngrok.io"
     },
     "DBInfo":{
         
     },
     "Line":{
-        "LiffId":"1653556959-wJ1xMV00"
+        "LiffId":"1653556959-wJ1xMV00",
+        "LINE_CHANNEL_ACCESS_TOKEN":"XdfNckCMfR+5SUET/I4MTg1BfjSLpqHD75CqzEAhI6y1tFTyqPLotL6/4MlMbkzcnIt+dqj+q3YS4hebQPYII7EUBX2sQFmmbp54+9Clsh1nvAxGPPeBncfkd69q1aFv940zwXVdtuSJrmVejk+PWVGUYhWQfeY8sLGRXgo3xvw=",
+        "LINE_CHANNEL_SECRET":"d340a2fa28267d1ce1afe0a50128ec0c"
     },
     "ReportCategory":[
         "遅刻",

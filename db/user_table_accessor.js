@@ -7,6 +7,7 @@ var db = new sqlite3.Database(":memory:",
 
 //     }
 //　データ挿入
+
 module.exports.insertUserData = function (param){
 
     return new Promise(function (resolve, reject) {
@@ -74,7 +75,6 @@ module.exports.userSelectAll = function (userId, callback) {
                         
                     }
                 }
-
             );
         });
     });

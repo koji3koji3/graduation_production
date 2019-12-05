@@ -1,6 +1,6 @@
 let express = require('express');
 let router = express.Router();
-let config = require('config')
+let config = require('config');
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     console.log(req.query.userId);
