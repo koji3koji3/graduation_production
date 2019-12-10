@@ -12,8 +12,6 @@ module.exports.insertUserData = function (param){
 
     return new Promise(function (resolve, reject) {
         db.serialize(function () {
-            //無ければ作る
-            db.run('CREATE TABLE IF NOT EXISTS user(student_number INT PRIMARY KEY, full_name TEXT, user_id TEXT, display_name TEXT)');
 
             db.run('insert into user (student_number, full_name, user_id, display_name) values ($a, $b, $c, $d)', 
                 {
@@ -23,12 +21,14 @@ module.exports.insertUserData = function (param){
                     $d: param.display_name
                 },
                 function (err, res) {
-                    if (err) return reject(err);
+                    if (err){
+                       reject(err);
+                    } 
                     
                     resolve(res);
                 }
             );
-        },db.close());
+        });
     });
 
 
@@ -63,7 +63,7 @@ module.exports.userSelectAll = function (userId, callback) {
                         console.log('---------------------');
                         return reject(err);
                     }else{
-                        if (res == 0){
+                        if (res.length == 0){
                             //ここでSQLの実行結果が0件の処理や
                             console.log('---------------------');
                             console.log('userSelectAll END');
@@ -71,6 +71,7 @@ module.exports.userSelectAll = function (userId, callback) {
                             resolve(res);
                         }else{
                             //処理や
+                            resolve(res);
                         }
                         
                     }

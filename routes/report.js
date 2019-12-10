@@ -15,7 +15,8 @@ router.get('/', function(req, res, next) {
 
         res.render('report', {
             title : '報告',
-            reportCategory  : config.ReportCategory
+            reportCategory  : config.ReportCategory,
+            LiffId: config.Line.LiffId
             // message: message
         });
         

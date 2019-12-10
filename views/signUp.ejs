@@ -3,40 +3,44 @@
     <div class="container">
         <!-- card -->
         <div>
-            <form action=""　class="bg-light">
-                <h4 class="text-center mt-3 bg-danger">遅刻・欠席報告</h4>
+            <form id='form'name='form' method="post" action="/signUp" class="bg-light">
+                <h4 class="text-center mt-3 bg-success text-white">利用申請</h4>
+                <br>
+                <!-- <div class="text-center">
+                    <img src="<%= iconUrl %>" class="rounded-circle w-25 border-danger" alt="...">
+                </div> -->
+                  
                 <div class="form-group">
                     <label for="reportCategory" class="row ml-1">
-                        <h5>報告種別</h5>
+                        <h5>1.学籍番号</h5 >
                     </label>
-                    
-                    <select class="form-control row ml-1 w-50" name="reportCategory" required>
-                        <option value="">選択してください</option>
-                        
-                    </select>
+
+                    <input type="number" class="form-control border-dark" name="student_number" size="30" minlength="8" maxlength="8" required>
                 </div>
                 
                 <!--  -->
                 <div class="form-group">
                     <label for="attendance" class="row ml-1">
-                        <h5>登校予定時間</h5>
+                        <h5>2.氏名</h5>
                     </label>
-                    <select class="form-control row ml-1 w-50" name="reportCategory" required>
-                        <option value="">選択してください</option>
-                    
-                            
-                    </select>
+                    <input type="text" class="form-control border-dark" name="full_name" size="30" minlength="1" maxlength="30" required>
                     
                 </div>
 
                 <div class="form-group">
-                    <label for="reportDetail" class="row ml-1"><h5>報告内容</h5></label>
-                    <!-- <input type="text" class="form-control" id="exampleDropdownFormPassword2" placeholder="Password"> -->
-                    <textarea class="form-control ml-1" name="reportDetail" id="" cols="10" rows="4" ></textarea>
-                </div>
+                    <label for="attendance" class="row ml-1">
+                        <h5>3.認証コード</h5>
+                    </label>
+                    <input type="password" class="form-control border-dark" name="authentication_code" size="30" minlength="5" maxlength="5" required>
                 
-                <div class="row mx-auto" style="widows: 50%;">
-                    <button type="submit" class="btn btn-success ">送信</button>
+                </div>
+
+                <input type="hidden"  name="userId" value="<%= userId %>">
+                <input type="hidden" name="displayName" value="<%= displayName %>">
+
+                <br>
+                <div class="row">
+                    <input type="submit" class="mx-auto btn btn-success btn-lg w-50"></button>
                 </div>
 
             </form>

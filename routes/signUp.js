@@ -40,17 +40,18 @@ router.get('/', function(req, res, next) {
     try{
         dbAccessor.userSelectAll(userId)
         .then(userSelectAllResult => {
-            //登録ページをレンダリング
+            //指定ユーザの登録情報確認
             if(userSelectAllResult.length === 0){
                 //ユーザ情報照会
                 client.getProfile(userId)
                 .then(function(profile){
-
+                    //利用申請
                     res.render('signUp', {
-                        title  : '登録',
+                        title  : '申請',
                         userId : userId,
                         displayName: displayName,
-                        iconUrl : profile.pictureUrl
+                        iconUrl : profile.pictureUrl,
+                        LiffId: config.Line.LiffId
                     });
                     // resolve(new profileData(userId, profile.displayName));
                 }).catch(function(err){
@@ -58,11 +59,17 @@ router.get('/', function(req, res, next) {
                     // reject(err);
                 });
                 
-                
             }
             //指定ページレンダリング
             else{
+
                 //すでに登録済
+                res.render('message', {
+                    title  : '結果',
+                    textMain:'承認までお待ちください。',
+                    LiffId: config.Line.LiffId
+                });
+
             }
             
 
@@ -82,6 +89,42 @@ router.get('/', function(req, res, next) {
     }
     finally{
     }
+});
+
+router.post('/', function(req, res, next) {
+    
+
+    const userId = req.body.userId;
+    const displayName = req.body.displayName;
+    if( userId === ''){}
+    let param = {
+        'student_number': req.body.student_number,
+        'full_name':req.body.full_name,
+        'userId':userId,
+        'display_name':displayName
+    };
+
+    //ユーザIDが無ければエラーページを返却
+    // if(req.query.userId === '' || req.query.userId === req.query.userId){}
+
+    
+    //ユーザID問い合わせ
+    dbAccessor.insertUserData(param)
+    .then(insertUserDataResult => {
+        console.log('------------------------------');
+        console.log('-----------success------------');
+        console.log('------------------------------');
+        console.log(insertUserDataResult);
+        console.log('------------------------------');
+        
+    })
+    .catch(err => {
+        console.log('------------------------------');
+        console.log('-------------ERROR------------');
+        console.log('------------------------------');
+        console.log('errorrr');
+        console.log('------------------------------');
+    });
 });
 
 module.exports = router;

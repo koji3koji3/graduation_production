@@ -10,30 +10,7 @@ const sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database(":memory:",
   sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE);
 
-try{
-  dbAccessor.userSelectAll()
-  .then(result =>{
-    console.log('ok');
-  })
-  .catch(err =>{
-    console.log('no ');
-  })
-}
-catch(err){
-  // console.log('------------------------------');
-  // console.log('------------ERROR-------------');
-  // console.log('------------------------------');
-  // console.log(err.name + ': ' + err.message);
-  // console.log('------------------------------');
- 
-}
-finally{
-  console.log('------------------------------');
-  console.log('------------FINALLY-----------');
-  console.log('------------------------------');
-  db.close();
-  console.log('------------------------------');
-}
+
 
 
 
@@ -83,6 +60,8 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error',{
+    title: 'エラー',
+    error_h1_title : res.locals.message,
     message:res.locals.message
   });
 });
