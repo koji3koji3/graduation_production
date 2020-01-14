@@ -131,13 +131,14 @@ module.exports.insertReportData = function (param){
     return new Promise(function (resolve, reject) {
         db.serialize(function () {
 
-            db.run('insert into reports (report_category, attendance_time, user_id, report_detail, report_time) values ($a, $b, $c, $d, $e)', 
+            db.run('insert into reports (report_category, attendance_time, full_name, report_detail, report_time, user_id) values ($a, $b, $c, $d, $e, $f)', 
                 {
                     $a: param.report_category,
                     $b: param.attendance_time,
-                    $c: param.user_id,
+                    $c: param.full_name,
                     $d: param.report_detail,
-                    $e: param.report_time
+                    $e: param.report_time,
+                    $f: param.userId
                 },
                 function (err, res) {
                     if (err){

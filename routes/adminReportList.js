@@ -2,7 +2,13 @@ let express = require('express');
 let router = express.Router();
 let config = require('config');
 const line = require('@line/bot-sdk');
+let moment = require("moment");
 
+// let wkTime = moment().format();
+// let idx = wkTime.indexOf('T');
+// let nowTime = wkTime.slice(0,idx);
+
+// console.log(nowTime);
 //-------------------------------------------------------------------
 // create LINE SDK config from env variables
 //-------------------------------------------------------------------
@@ -34,26 +40,36 @@ router.get('/', function(req, res, next) {
             let tardy = [];
             //欠席
             let absence = [];
-            //タブ分けするために、遅刻と欠席のデータを分ける
+            //当日の日付取得後DB内の報告データから
+            //日付が一致しているものを表示
+            let wkTime = moment().format();
+            let idx = wkTime.indexOf('T');
+            let today = wkTime.slice(0,idx);
+
+            //タブ分けするために、当日の遅刻と欠席のデータを分ける
             res.forEach(elem => {
-                //遅刻判定
-                if(elem.report_category === 0){
-                    tardy.push(elem);
-                //欠席
-                }else if(elem.report_category === 1){
-                    absence.push(elem)
+                //当日のデータのみ処理
+                if(elem.report_time === today){
+                    //遅刻判定
+                    if(elem.report_category === 0){
+                        tardy.push(elem);
+                    //欠席
+                    }else if(elem.report_category === 1){
+                        absence.push(elem)
+                    }
                 }
             });
 
-            //指定ユーザの登録情報確認
-            if(res.length === 0){
+            //情報がない場合の処理
+            if(tardy.length === 0 && absence.length === 0){
                 
             }
-            //登録されている場合
+            //情報があった場合タブ分けで表示
             else{
-                res.render('message', {
-                    title  : '結果',
-                    textMain:'承認までお待ちください。',
+                res.render('adminReportList', {
+                    title  : '報告一覧',
+                    tardy  : tardy,
+                    absence: absence,
                     LiffId: config.Line.LiffId
                 });
             }

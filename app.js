@@ -32,10 +32,11 @@ try{
     // report_id :        インデックス(INT 主キー 自動発番)
     // report_category :  報告種別(INT)
     // attendance_time :  出席時間(INT)
-    // user_id :          ユーザID(TEXT) 
+    // full_name :        フルネーム(TEXT) 
     // report_detail :    報告内容(TEXT)
     // report_time :      報告日時(TEXT)
-    db.run('CREATE TABLE IF NOT EXISTS reports(report_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, report_category INT NOT NULL, attendance_time INT NOT NULL, user_id TEXT NOT NULL, report_detail TEXT NOT NULL, report_time TEXT NOT NULL)');
+    // user_id :          ユーザID(TEXT) 
+    db.run('CREATE TABLE IF NOT EXISTS reports(report_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, report_category INT NOT NULL, attendance_time INT NOT NULL, full_name TEXT NOT NULL, report_detail TEXT NOT NULL, report_time TEXT NOT NULL, user_id TEXT NOT NULL)');
 
 
   });
